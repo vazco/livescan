@@ -1,15 +1,35 @@
-import {APIGatewayEvent, Callback, Context, Handler} from 'aws-lambda';
+import {APIGatewayEvent, Callback, Context} from 'aws-lambda';
 
-const hello: Handler = (event: APIGatewayEvent, context: Context, cb: Callback) => {
-    const response = {
-        statusCode: 200,
-        body: JSON.stringify({
-            message: 'Hackathon rulez!',
-            input: event,
-        }),
-    };
+import {getConfig} from '../api';
+import {notify} from '../notificators';
+import {runTesters} from '../testers';
+import {Config} from '../types';
 
-    cb(null, response);
+export default async (event: APIGatewayEvent, context: Context, cb: Callback) => {
+    try {
+
+        // Get configuration data
+        const config: Config = await getConfig();
+
+        // Execute configured tests
+        const testResults = await runTesters(config);
+
+        // Notify about executed tests
+        const notifyResults = await notify(config, testResults);
+
+        cb(null, {
+            body: JSON.stringify({
+                message: 'Execution complete',
+                notifyResults,
+                testResults,
+            }),
+            statusCode: 200,
+        });
+    } catch (err) {
+        console.error(err);
+        cb(null, {
+            body: JSON.stringify(err),
+            statusCode: 500,
+        });
+    }
 };
-
-export default hello;

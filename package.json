@@ -5,9 +5,9 @@
   "description": "Live apps health scanner",
   "scripts": {
     "full-deploy": "sls deploy",
-    "deploy:hello": "sls deploy -f hello",
+    "deploy:hello": "sls deploy function -f hello",
     "invoke:hello": "sls invoke local -f hello",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "tslint -p . -t verbose"
   },
   "license": "MIT",
   "devDependencies": {
