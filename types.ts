@@ -1,11 +1,11 @@
 export interface Config {
-    services: [ServiceConfig];
+    services: ServiceConfig[];
 }
 
 export interface ServiceConfig {
     name: string;
-    testers: [TesterConfig];
-    notificators: [NotificatorConfig];
+    testers: TesterConfig[];
+    notificators: NotificatorConfig[];
 }
 
 export interface TesterConfig {
@@ -14,4 +14,8 @@ export interface TesterConfig {
 }
 export interface NotificatorConfig {
     type: string;
+}
+
+export type TestResults = {
+    isOK: boolean;
 }
