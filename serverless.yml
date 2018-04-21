@@ -60,6 +60,8 @@ provider:
 functions:
   getConfig:
     handler: api/index.default
+  initDB:
+    handler: api/InitialMockupData.default
 
   main:
     handler: handlers/main.default

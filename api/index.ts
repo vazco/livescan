@@ -1,25 +1,37 @@
-import {DynamoDB} from 'aws-sdk';
+import { DynamoDB } from 'aws-sdk';
 
-import {Config} from '../types';
-import {APIGatewayEvent, Callback, Context} from 'aws-lambda';
-import {notify} from '../notificators';
-import {runTesters} from '../testers';
+import { Config } from '../types';
+import { APIGatewayEvent, Callback, Context } from 'aws-lambda';
+import { notify } from '../notificators';
+import { runTesters } from '../testers';
 
- const doubleFunction = async () => {
+const doubleFunction = async () => {
+    const itemId = 'temp1';
+
     const params = {
-        TableName : "Services",
+        TableName: "Services",
         Item: {
-            _id: {S: 'abc1'},
-            name: {S: "Stare-BI"}
+            _id: { S: itemId },
+            name: { S: "Stare-BI" }
         }
     }
     const ddb = new DynamoDB();
-    ddb.putItem(
-            )
+    await ddb.putItem(params).promise()
 
-    return await ddb.putItem(params).promise()
+    const query = {
+        TableName: 'Services'
+        // ,
+        // Key: {
+        //     _id: {
+        //         S: itemId
+        //     }
+        // }
+    }
+
+    return await ddb.scan(query).promise()
+
     // const ddb = new DynamoDB().promise()
- }
+}
 
 export const getConfig = async (): Promise<Config> => {
     return {
@@ -47,7 +59,7 @@ export default async (event: APIGatewayEvent, context: Context, cb: Callback) =>
     try {
 
         const res = await doubleFunction();
-        console.log(res)
+        console.log(res.Items[1])
         cb(null, {
             body: JSON.stringify({
                 message: JSON.stringify(res)

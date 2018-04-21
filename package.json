@@ -7,12 +7,11 @@
     "full-deploy": "sls deploy",
     "deploy:hello": "sls deploy function -f hello",
     "invoke:hello": "sls invoke local -f hello",
-    "test": "echo \"Error: no test specified\" && exit 0",
+    "test": "tslint -p . -t verbose",
     "deploy:getConfig": "sls deploy -f getConfig",
     "invoke:getConfig": "sls invoke local -f getConfig",
     "deploy:main": "sls deploy function -f main",
-    "invoke:main": "sls invoke local -f main",
-    "test": "tslint -p . -t verbose"
+    "invoke:main": "sls invoke local -f main"
   },
   "license": "MIT",
   "devDependencies": {
