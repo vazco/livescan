@@ -6,60 +6,23 @@ import { notify } from '../notificators';
 import { runTesters } from '../testers';
 
 const doubleFunction = async () => {
-    const itemId = 'temp1';
+    const ddb = new DynamoDB();
 
     const params = {
-        TableName: "Services",
-        Item: {
-            _id: { S: itemId },
-            name: { S: "Stare-BI" }
-        }
-    }
-    const ddb = new DynamoDB();
-    await ddb.putItem(params).promise()
-
-    const query = {
         TableName: 'Services'
-        // ,
-        // Key: {
-        //     _id: {
-        //         S: itemId
-        //     }
-        // }
     }
 
-    return await ddb.scan(query).promise()
+    const dynamoObject = await ddb.scan(params).promise()
 
-    // const ddb = new DynamoDB().promise()
+    console.log(dynamoObject)
+    return  dynamoObject.Items.map(x => DynamoDB.Converter.unmarshall(x));
 }
-
-export const getConfig = async (): Promise<Config> => {
-    return {
-        services: [
-            {
-                name: 'Example API',
-                notificators: [
-                    {
-                        type: 'email',
-                    },
-                ],
-                testers: [
-                    {
-                        type: 'curl',
-                        url: 'http://example.com',
-                    },
-                ],
-            },
-        ],
-    };
-};
-
 
 export default async (event: APIGatewayEvent, context: Context, cb: Callback) => {
     try {
 
         const res = await doubleFunction();
-        console.log(res.Items[1])
+        console.log(res)
         cb(null, {
             body: JSON.stringify({
                 message: JSON.stringify(res)

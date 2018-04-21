@@ -9,6 +9,7 @@ import { runTesters } from '../testers';
 const mockupData = {
     services: [
             {
+            _id: '1',
             name: 'Example API',
             notificators: [
                 {
@@ -30,24 +31,16 @@ const mockupData = {
 export default async (event: APIGatewayEvent, context: Context, cb: Callback) => {
     try {
 
-        console.log(DynamoDB.Converter.marshall(mockupData))
+        const ddb = new DynamoDB();
+        mockupData.services.forEach(async (item, index) =>  {
+            const params = {
+                TableName: "Services",
+                Item: DynamoDB.Converter.marshall(item)
+            }
+            await ddb.putItem(params).promise()
 
-        // mockupData.services.forEach(item => {
+        });
 
-        //     const params = {
-        //         TableName: "Services",
-        //         Item: {
-        //             _id: { S: 'sdgf' },
-        //             name: { S: "Stare-BI" }
-        //         }
-        //     }
-        //     const ddb = new DynamoDB();
-        //     await ddb.putItem(params).promise()
-
-        // });
-        // const res = await doubleFunction();
-
-        // console.log(res.Items[1])
         cb(null, {
             body: JSON.stringify({
                 // message: JSON.stringify()
