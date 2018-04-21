@@ -1,0 +1,11 @@
+{
+  "name": "livescan",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Live apps health scanner",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT"
+}
