@@ -1,13 +1,12 @@
 import {APIGatewayEvent, Callback, Context} from 'aws-lambda';
 
-import {getConfig} from '../api';
-import {notify} from '../notificators';
-import {runTesters} from '../testers';
-import {Config} from '../types';
+import {getConfig} from 'api';
+import {notify} from 'notificators';
+import {runTesters} from 'testers';
+import {Config} from 'types';
 
 export default async (event: APIGatewayEvent, context: Context, cb: Callback) => {
     try {
-
         // Get configuration data
         const config: Config = await getConfig();
 

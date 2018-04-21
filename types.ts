@@ -18,4 +18,13 @@ export interface NotificatorConfig {
 
 export type TestResults = {
     isOK: boolean;
+    services: ServiceTestResult[];
+}
+export type ServiceTestResult = {
+    isOK: boolean;
+    name: string;
+    error?: TestResultError;
+}
+export type TestResultError = {
+    message: string;
 }
