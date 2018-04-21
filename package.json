@@ -7,10 +7,9 @@
     "full-deploy": "sls deploy",
     "deploy:hello": "sls deploy function -f hello",
     "invoke:hello": "sls invoke local -f hello",
-    "test": "tslint -p . -t verbose",
-    "deploy:tempKacper": "sls deploy -f tempKacper",
-    "invoke:tempKacper": "sls invoke local -f tempKacper",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "deploy:getConfig": "sls deploy -f getConfig",
+    "invoke:getConfig": "sls invoke local -f getConfig"
   },
   "license": "MIT",
   "devDependencies": {
