@@ -3,9 +3,21 @@
   "private": true,
   "version": "1.0.0",
   "description": "Live apps health scanner",
-  "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "full-deploy": "sls deploy",
+    "deploy:hello": "sls deploy -f hello",
+    "invoke:hello": "sls invoke local -f hello",
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/aws-lambda": "8.10.1",
+    "@types/node": "9.6.6",
+    "serverless": "1.26.1",
+    "serverless-webpack": "4.4.0",
+    "ts-loader": "2.3.7",
+    "tslint": "5.9.1",
+    "typescript": "2.8.3",
+    "webpack": "3.11.0"
+  }
 }
