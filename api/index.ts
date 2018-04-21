@@ -1,9 +1,7 @@
 import { DynamoDB } from 'aws-sdk';
 
-import { Config } from '../types';
-import { APIGatewayEvent, Callback, Context } from 'aws-lambda';
-import { notify } from '../notificators';
-import { runTesters } from '../testers';
+import {Config, TesterType} from '../types';
+import {APIGatewayEvent, Callback, Context} from 'aws-lambda';
 
 const doubleFunction = async () => {
     const ddb = new DynamoDB();
@@ -16,7 +14,28 @@ const doubleFunction = async () => {
 
     console.log(dynamoObject)
     return  dynamoObject.Items.map(x => DynamoDB.Converter.unmarshall(x));
-}
+};
+
+export const getConfig = async (): Promise<Config> => {
+    return {
+        services: [
+            {
+                name: 'Example API',
+                notificators: [
+                    {
+                        type: 'email',
+                    },
+                ],
+                testers: [
+                    {
+                        type: TesterType.curl,
+                        url: 'http://example.com',
+                    },
+                ],
+            },
+        ],
+    };
+};
 
 export default async (event: APIGatewayEvent, context: Context, cb: Callback) => {
     try {

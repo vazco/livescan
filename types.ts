@@ -1,20 +1,31 @@
-export interface Config {
+export type Config = {
     services: ServiceConfig[];
 }
 
-export interface ServiceConfig {
+export type ServiceConfig = {
     name: string;
     testers: TesterConfig[];
     notificators: NotificatorConfig[];
 }
 
-export interface TesterConfig {
+export type NotificatorConfig = {
     type: string;
+}
+
+export type TesterConfig = CurlTesterConfig;
+
+export const enum TesterType {
+    curl = 'curl',
+    // ddp,
+    // puppeteer,
+}
+
+type CommonTesterConfig = {
+    type: TesterType;
+}
+export type CurlTesterConfig = CommonTesterConfig & {
     url: string;
-}
-export interface NotificatorConfig {
-    type: string;
-}
+};
 
 export type TestResults = {
     isOK: boolean;
@@ -28,3 +39,4 @@ export type ServiceTestResult = {
 export type TestResultError = {
     message: string;
 }
+export type TesterAdapter<Config = CommonTesterConfig> = (Config) => Promise<ServiceTestResult>

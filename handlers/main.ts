@@ -3,7 +3,7 @@ import {APIGatewayEvent, Callback, Context} from 'aws-lambda';
 import {getConfig} from 'api';
 import {notify} from 'notificators';
 import {runTesters} from 'testers';
-import {Config} from 'types';
+import {Config, TestResults} from 'types';
 
 export default async (event: APIGatewayEvent, context: Context, cb: Callback) => {
     try {
@@ -11,7 +11,7 @@ export default async (event: APIGatewayEvent, context: Context, cb: Callback) =>
         const config: Config = await getConfig();
 
         // Execute configured tests
-        const testResults = await runTesters(config);
+        const testResults: TestResults = await runTesters(config);
 
         // Notify about executed tests
         const notifyResults = await notify(config, testResults);
