@@ -58,6 +58,9 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
+  getConfig:
+    handler: api/index.default
+
   main:
     handler: handlers/main.default
 
@@ -68,6 +71,21 @@ functions:
       - http:
           path: test
           method: get
+resources:
+  Resources:
+    Services:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: Services
+        AttributeDefinitions:
+          - AttributeName: _id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: _id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
 #      - sns: greeter-topic
