@@ -3,12 +3,22 @@
   "extends": [
     "tslint:recommended"
   ],
-  "jsRules": {},
   "rules": {
     "arrow-parens": [true, "ban-single-arg-parens"],
-    "interface-name": false,
-    "no-console": false,
-    "quotemark": [true, "single"]
-  },
-  "rulesDirectory": []
+    "quotemark": [true, "single"],
+    "semicolon": [true, "never"],
+    "trailing-comma": [true, {"multiline": "never", "singleline": "never"}],
+    "typedef": [
+      true,
+      "call-signature",
+      "arrow-call-signature",
+      "parameter",
+      "arrow-parameter",
+      "property-declaration",
+      "variable-declaration",
+      "member-variable-declaration",
+      "object-destructurin",
+      "array-destructuring"
+    ]
+  }
 }

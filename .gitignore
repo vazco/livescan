@@ -1,5 +1,9 @@
-.idea
-.serverless
-.vscode
-.webpack
+# package directories
 node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+
+# Webpack directories
+.webpack

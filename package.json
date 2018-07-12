@@ -1,29 +1,27 @@
 {
-  "name": "livescan",
-  "private": true,
+  "name": "livescan2",
   "version": "1.0.0",
-  "description": "Live apps health scanner",
+  "description": "Vazco service health checking tool",
   "scripts": {
-    "full-deploy": "sls deploy",
-    "deploy:hello": "sls deploy function -f hello",
-    "invoke:hello": "sls invoke local -f hello",
-    "test": "tslint -p . -t verbose",
-    "deploy:getConfig": "sls deploy -f getConfig",
-    "invoke:getConfig": "sls invoke local -f getConfig",
-    "deploy:main": "sls deploy function -f main",
-    "invoke:main": "sls invoke local -f main"
+    "deploy": "sls deploy",
+    "start": "sls invoke local --function healthCheck",
+    "test": "tslint -p . -t verbose --fix "
   },
-  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.270.1",
+    "lodash.merge": "^4.6.1",
+    "source-map-support": "^0.5.0"
+  },
   "devDependencies": {
     "@types/aws-lambda": "8.10.1",
     "@types/aws-sdk": "^2.7.0",
-    "@types/node": "9.6.6",
-    "aws-sdk": "^2.226.1",
-    "serverless": "1.26.1",
-    "serverless-webpack": "4.4.0",
-    "ts-loader": "2.3.7",
-    "tslint": "5.9.1",
-    "typescript": "2.8.3",
-    "webpack": "3.11.0"
-  }
+    "@types/node": "^8.10.21",
+    "serverless-webpack": "^5.1.1",
+    "ts-loader": "^4.2.0",
+    "tslint": "^5.10.0",
+    "typescript": "^2.8.1",
+    "webpack": "^4.5.0"
+  },
+  "author": "Jan Owsiany <<jan.owsiany@vazco.eu>>",
+  "license": "MIT"
 }
