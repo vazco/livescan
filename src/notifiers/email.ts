@@ -1,15 +1,13 @@
 import * as AWS from 'aws-sdk'
 import _merge from 'lodash.merge'
 
-import {IServiceCheckResult} from '../types'
+import { IServiceCheckResult } from '../types'
 
 const AWS_SES: AWS.SES = new AWS.SES()
 
 const defaultParams: AWS.SES.SendEmailRequest = {
   Destination: {
-    ToAddresses: [
-      'developer@vazco.eu'
-    ]
+    ToAddresses: ['developer@vazco.eu']
   },
   Message: {
     Body: {
@@ -34,8 +32,8 @@ export default (results: IServiceCheckResult[]): Promise<any> => {
           Data: `
           <h1>Vazco service health check has been run.</h1>
           <p>These are the results:</p>
-          <ul>${results.map(({ isOk, name }: IServiceCheckResult) =>
-            `<li>${name}: <b>${isOk ? 'Success' : 'Failure'}</b></li>`
+          <ul>${results.map(
+            ({ isOk, name }: IServiceCheckResult) => `<li>${name}: <b>${isOk ? 'Success' : 'Failure'}</b></li>`
           )}</ul>
           `
         }

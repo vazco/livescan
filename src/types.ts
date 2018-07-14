@@ -3,7 +3,7 @@ export enum TestType {
 }
 
 export interface IService {
-  url: string,
+  url: string
   name: string
   type: TestType
 }

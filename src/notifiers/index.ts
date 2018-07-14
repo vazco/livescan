@@ -1,6 +1,6 @@
 import email from './email'
 
-import {IServiceCheckResult, Notifier} from '../types'
+import { IServiceCheckResult, Notifier } from '../types'
 
 const NOTIFIERS: Notifier[] = [email]
 

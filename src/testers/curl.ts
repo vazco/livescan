@@ -1,6 +1,6 @@
 import * as url from 'url'
 
-import {IService, IServiceCheckResult} from '../types'
+import { IService, IServiceCheckResult } from '../types'
 
 const curl = (args: IService): Promise<IServiceCheckResult> => {
   const lib = args.url.startsWith('https') ? require('https') : require('http')
@@ -20,7 +20,7 @@ const curl = (args: IService): Promise<IServiceCheckResult> => {
           resolve({ ...args, isOk: true })
         }
       })
-       .on('error', () => resolve({ ...args, isOk: false }))
+      .on('error', () => resolve({ ...args, isOk: false }))
   })
 }
 

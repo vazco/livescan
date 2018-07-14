@@ -3,7 +3,7 @@ import { APIGatewayEvent, Callback, Context } from 'aws-lambda'
 import runNotifiers from './notifiers'
 import runTesters from './testers'
 
-import {IServiceCheckResult, TestType} from './types'
+import { IServiceCheckResult, TestType } from './types'
 
 interface IResponse {
   statusCode: number
@@ -12,8 +12,9 @@ interface IResponse {
 
 export default async (event: APIGatewayEvent, context: Context, cb: Callback): Promise<void> => {
   try {
-    const results: IServiceCheckResult[] =
-      await runTesters([{ name: 'Vazco', type: TestType.CURL, url: 'http://vazco.eu/' }])
+    const results: IServiceCheckResult[] = await runTesters([
+      { name: 'Vazco', type: TestType.CURL, url: 'http://vazco.eu/' }
+    ])
 
     await runNotifiers(results)
 

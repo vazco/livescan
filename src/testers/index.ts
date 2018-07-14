@@ -1,14 +1,13 @@
 import curl from './curl'
 
-import {Adapter, IService, IServiceCheckResult, TestType} from '../types'
+import { Adapter, IService, IServiceCheckResult, TestType } from '../types'
 
 type AdapterKey = TestType | 'default'
 
-const ADAPTERS: {[k in AdapterKey]: Adapter} = {
+const ADAPTERS: { [k in AdapterKey]: Adapter } = {
   [TestType.CURL]: curl,
-  default: async (x: IService): Promise<IServiceCheckResult> => ({...x, isOk: false})
+  default: async (x: IService): Promise<IServiceCheckResult> => ({ ...x, isOk: false })
 }
 
-export default
-  (services: IService[]): Promise<any> =>
-    Promise.all(services.map((service: IService) => ADAPTERS[service.type](service)))
+export default (services: IService[]): Promise<any> =>
+  Promise.all(services.map((service: IService) => ADAPTERS[service.type](service)))
