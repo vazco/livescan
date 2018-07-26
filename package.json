@@ -1,5 +1,5 @@
 {
-  "name": "livescan2",
+  "name": "livescan",
   "version": "1.0.0",
   "description": "Vazco service health checking tool",
   "scripts": {
