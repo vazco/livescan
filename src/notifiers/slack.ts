@@ -1,4 +1,5 @@
 import fetch from 'node-fetch'
+
 import { IServiceCheckResult } from '../types'
 
 export default (results: IServiceCheckResult[]): Promise<any> => {
