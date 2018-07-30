@@ -1,5 +1,8 @@
 import { APIGatewayEvent, Callback, Context } from 'aws-lambda'
 
+import { createTableIfNoExists, saveResults } from './helpers'
+import tableStructure from './db/tableStructure'
+
 import runNotifiers from './notifiers'
 import runTesters from './testers'
 
@@ -17,6 +20,12 @@ export default async (event: APIGatewayEvent, context: Context, cb: Callback): P
     ])
 
     await runNotifiers(results)
+
+    const { TableName } = tableStructure
+
+    await createTableIfNoExists(tableStructure)
+
+    await saveResults(results, TableName)
 
     const response: IResponse = {
       body: JSON.stringify({
