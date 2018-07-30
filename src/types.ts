@@ -10,6 +10,8 @@ export interface IService {
 
 export interface IServiceCheckResult extends IService {
   isOk: boolean
+  statusCode: string
+  duration: number
 }
 
 export type Adapter = (arg: IService) => Promise<IServiceCheckResult>

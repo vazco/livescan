@@ -6,7 +6,12 @@ type AdapterKey = TestType | 'default'
 
 const ADAPTERS: { [k in AdapterKey]: Adapter } = {
   [TestType.CURL]: curl,
-  default: async (x: IService): Promise<IServiceCheckResult> => ({ ...x, isOk: false })
+  default: async (x: IService): Promise<IServiceCheckResult> => ({
+    ...x,
+    duration: null,
+    isOk: false,
+    statusCode: null
+  })
 }
 
 export default (services: IService[]): Promise<any> =>
