@@ -10,6 +10,7 @@ export interface IService {
 
 export interface IServiceCheckResult extends IService {
   isOk: boolean
+  errorCode: string
   statusCode: string
   duration: number
 }

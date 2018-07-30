@@ -9,6 +9,7 @@ const ADAPTERS: { [k in AdapterKey]: Adapter } = {
   default: async (x: IService): Promise<IServiceCheckResult> => ({
     ...x,
     duration: null,
+    errorCode: null,
     isOk: false,
     statusCode: null
   })

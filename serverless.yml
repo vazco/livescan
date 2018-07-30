@@ -13,6 +13,8 @@ provider:
   region: eu-west-1
   environment:
     SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+    AWS_REGION: eu-west-1
+    AWS_DYNAMODB_ENDPOINT: https://dynamodb.eu-west-1.amazonaws.com
 
 functions:
   healthCheck:
